@@ -12,37 +12,31 @@ window = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 FPS = 60
 
-sprite_images = {
-    'player': ['images/ship_images/spaceship_player.png', YELLOW],
-    'red_enemy': ['images/ship_images/red_spaceship.png', RED],
-    'blue_enemy': ['images/ship_images/blue_spaceship.png', BLUE],
-    'green_enemy': ['images/ship_images/green_spaceship.png', GREEN],
-    'boss': ['images/ship_images/boss_spaceship.png', PURPLE]
-}
-
-player = Player(window, 8, 120, 120, sprite_images['player'], 0.4, 100)
+player = Player(window, 8, 120, 120, sprite_images['player'], 0.6, 100)
 
 boss_sprite = GameBoss(window, 1, 180, 180, sprite_images['boss'], 0.8, 100, WIDTH//2, -200)
 enemies = pygame.sprite.Group()
 
-#creating fonts and texts for game
 basic_font = pygame.font.SysFont('verdana', 30)
 events_font = pygame.font.SysFont('kodchiangupc', 90)
 menu_font = pygame.font.SysFont('leelawadeeuisemilight', 80, True)
 
 #add event to dictionary as key, add event function as value
 events = {
-    'win': lambda: win(events_font.render(f"YOU WIN {input_name.get_value()}!", True, GREEN), window=window, position=(10, 250)), 
-    'lose': lambda: lose(events_font.render(f"YOU LOSE {input_name.get_value()}!", True, RED), window=window, position=(10, 250)),
+    'win': lambda: win(events_font.render(f"YOU WIN {input_name.get_value()}!", True, GREEN, BLACK), window=window, position=(10, 250)), 
+    'lose': lambda: lose(events_font.render(f"YOU LOSE {input_name.get_value()}!", True, RED, BLACK), window=window, position=(10, 250)),
 }
+
+
 hard_levels = {1: 'easy', 2: 'medium', 3:'hard', 4:'boss'}
+location_levels = {1: 'space', 2: 'forest', 3: 'sea', 4: 'volcano'}
 finishing_type = ''
 finishing_variants = ['win', 'lose']
 enemies_length = 0
-level, max_level = 0, 4 #Level by default: 0, max_level with boss: 2
+level, max_level = 0, 4 #Level by default: 0, max_level with boss: 4
 
 
-#create menu
+#create main and set menu
 main_menu = Menu(window, menu_font)
 main_menu.add_button('START', (55, 219, 154), lambda: game())
 main_menu.add_button("SETTINGS", (209, 8, 45), lambda: settings())
@@ -79,8 +73,9 @@ def menu():
 def game():
     global level, max_level, enemies_length, finishing_type
     background = pygame.transform.scale(
-    pygame.image.load('images/backgrounds/space.jpg'), (WIDTH, HEIGHT)
-    )
+        pygame.image.load(location_themes['background'].get(location_levels.get(1))), 
+        (WIDTH, HEIGHT))
+    
     pygame.display.set_caption("Space Shooter")
     game, finish, is_boss = [True, False, False] # game = True; finish = False; boss = False
     while game:
@@ -100,10 +95,14 @@ def game():
                 finish = True
             if len(enemies) == 0 and not is_boss:
                 level += 1
+                background = pygame.transform.scale(
+                    pygame.image.load(location_themes['background'].get(location_levels.get(level))), 
+                    (WIDTH, HEIGHT))
                 if level < max_level:
                     enemies_length += 3
                     [create_enemy(window, enemies, sprite_images[choice(['red_enemy', 'blue_enemy', 'green_enemy'])])
                     for i in range(enemies_length)]
+
             if level == max_level:
                 is_boss = True
             if is_boss:
@@ -115,9 +114,8 @@ def game():
                     finishing_type = finishing_variants[0]
             enemies.update(player)
             enemies.draw(window)
-
-            health_text = basic_font.render(f"Health: {player.health}", True, RED, WHITE)
-            level_text = basic_font.render(f"Level: {hard_levels[level]}", True, WHITE, YELLOW)
+            health_text = basic_font.render(f"Health: {player.health}", True, *location_themes['health_text'][location_levels[level]])
+            level_text = basic_font.render(f"Level: {hard_levels[level]}", True, *location_themes['score_text'][location_levels[level]])
             level_text_pos = (WIDTH-level_text.get_width(), 0)
             draw_text(health_text, level_text, window=window, health_pos=(0, 0), level_pos=level_text_pos)
         elif finish:
