@@ -8,7 +8,7 @@ class Enemy(Ship):
     def update(self, player):
         self.move_bullets(player)
         self.rect.y += self.speed
-        if len(self.groups()[0].sprites()) == randint(0, FPS) and self.rect.y >= -150:
+        if len(self.groups()[0].sprites()) == randint(0, FPS*2) and self.rect.y >= -150:
            self.do_delay(lambda: self.shoot(8))
         if pygame.sprite.collide_rect(player, self) or self.off_screen():
             player.health -= self.health
@@ -16,7 +16,7 @@ class Enemy(Ship):
         if self.health <= 0:
             self.kill()
 class GameBoss(Enemy):
-    rand_x_positions = [-3, -2, 2, 3]
+    rand_x_positions = [-4, -3, -2, 2, 3, 4]
     randx = choice(rand_x_positions)
     def update(self, player):
         self.rect.y += self.speed

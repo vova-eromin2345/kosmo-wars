@@ -1,13 +1,13 @@
 from random import choice
 from classes.locals import Enemy
 from music import *
-from variables import ENEMY_WIDTH, ENEMY_HEIGHT
+from variables import ENEMY_WIDTH, ENEMY_HEIGHT, bullet_power
 
 def create_enemy(window, enemies_group, enemy_color):
     random_pos_x = choice(list(range(0, window.get_width() - 100)))
     random_pos_y = choice(list(range(-1400, -100)))
     _enemy_ = Enemy(window, 3, ENEMY_WIDTH, ENEMY_HEIGHT, enemy_color,
-                        0.4, Enemy.bullet_power, random_pos_x, random_pos_y)
+                        0.4, bullet_power, random_pos_x, random_pos_y)
     enemies_group.add(_enemy_)
 
 def draw_text(*text_objects, window, **positions):

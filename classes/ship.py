@@ -1,9 +1,9 @@
 import pygame, time
 from classes.bullet import Bullet
 from classes.game_sprite import GameSprite
+from variables import bullet_power
 
 class Ship(GameSprite):
-    bullet_power = 10
     def __init__(self, window, speed, width, height, 
                 filename, delay, health, x=0, y=0):
         super().__init__(window, speed, width, height, x, y)
@@ -22,7 +22,7 @@ class Ship(GameSprite):
             func()
 
     def shoot(self, bullet_speed, bullet_padding_x=0):
-        bullet = Bullet(self.window, 2, 25, self.rect.centerx+bullet_padding_x,
+        bullet = Bullet(self.window, 5, 25, self.rect.centerx+bullet_padding_x,
                             self.rect.centery, 
                             bullet_speed, self.filename[1])
         self.bullets_group.add(bullet)
@@ -33,6 +33,6 @@ class Ship(GameSprite):
         if pygame.sprite.groupcollide(self.bullets_group, enemies, False, False):
             for x in enemies:
                 if pygame.sprite.spritecollide(x, self.bullets_group, True):
-                    x.health -= Ship.bullet_power
+                    x.health -= bullet_power
     def reset_health(self):
         self.health = self.START_HEALTH
