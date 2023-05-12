@@ -16,7 +16,7 @@ class Menu:
         for index, btn in enumerate(self.buttons):
             rect = pygame.Rect(self.window_rect.width//2-btn.get_width()//2, padding_y*(index+1), *btn.get_size())
             if index == self.select_btn_index:
-                pygame.draw.rect(self.window, (173, 7, 32), pygame.Rect(rect.x-20, rect.y, rect.width+40, rect.height), 10, 10)
+                pygame.draw.rect(self.window, (173, 7, 32), pygame.Rect(rect.x-20, rect.y-20, rect.width+40, rect.height+40), 10, 10)
             self.window.blit(btn, rect)
     def select(self, direction):
         if self.select_btn_index == len(self.buttons)-1 and direction == 1:

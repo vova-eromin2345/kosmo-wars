@@ -163,7 +163,11 @@ def settings():
         for ev in events:
             if ev.type ==  pygame.QUIT:
                 quit_settings()
-
+        if set_menu.is_enabled():
+            set_menu.draw(window)
+            set_menu.update(events)
+            back_btn.set_onreturn(quit_settings)
+            
         pygame.display.update()
         clock.tick(FPS)
 
