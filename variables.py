@@ -18,7 +18,7 @@ BLACK = (0, 0, 0)
 
 
 sprite_images = {
-    'player': ['images/ship_images/spaceship_player.png', RED],
+    'player': ['images/ship_images/spaceship_player.png', PURPLE],
     'red_enemy': ['images/ship_images/red_spaceship.png', RED],
     'blue_enemy': ['images/ship_images/blue_spaceship.png', BLUE],
     'green_enemy': ['images/ship_images/green_spaceship.png', GREEN],
