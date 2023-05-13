@@ -22,7 +22,7 @@ class Ship(GameSprite):
             func()
 
     def shoot(self, bullet_speed, bullet_padding_x=0):
-        bullet = Bullet(self.window, 5, 25, self.rect.centerx+bullet_padding_x,
+        bullet = Bullet(self.window, 4, 20, self.rect.centerx+bullet_padding_x,
                             self.rect.centery, 
                             bullet_speed, self.filename[1])
         self.bullets_group.add(bullet)

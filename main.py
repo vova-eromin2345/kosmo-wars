@@ -13,7 +13,7 @@ clock = pygame.time.Clock()
 
 #create game sprites
 player = Player(window, 8, PLAYER_WIDTH, PLAYER_HEIGHT, sprite_images['player'], 0.4, 100)
-boss_sprite = GameBoss(window, 1, BOSS_WIDTH, BOSS_HEIGHT, sprite_images['boss'], 0.8, 100, WIDTH//2, -200)
+boss_sprite = GameBoss(window, 2, BOSS_WIDTH, BOSS_HEIGHT, sprite_images['boss'], 0.8, 100, WIDTH//2, -200)
 enemies = pygame.sprite.Group()
 
 #create fonts
