@@ -15,5 +15,5 @@ my_theme.widget_font_color = (200, 0, 0)
 my_theme.widget_background_color = (10, 10, 10)
 my_theme.widget_border_width = 5
 my_theme.widget_border_color = (200, 0, 0)
-my_theme.widget_margin = (0, 30)
+my_theme.widget_margin = (10, 20)
 my_theme.widget_font_size = 30

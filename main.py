@@ -4,6 +4,7 @@ from game_tools import *
 from theme import *
 from variables import * 
 
+
 pygame.init()
 
 #creating main window, clock
@@ -27,7 +28,6 @@ events = {
     'lose': lambda: lose(events_font.render(f"YOU LOSE {input_name.get_value()}!", True, RED, BLACK), window=window, position=(10, 250)),
 }
 
-
 hard_levels = {1: 'easy', 2: 'medium', 3:'hard', 4:'boss'}
 location_levels = {1: 'space', 2: 'forest', 3: 'sea', 4: 'volcano'}
 finishing_type = ''
@@ -44,11 +44,19 @@ main_menu.add_button('EXIT', (219, 53, 150), exit)
 
 #create settings menu
 set_menu = pygame_menu.Menu("Settings", WIDTH, HEIGHT, theme=my_theme)
-input_name = set_menu.add.text_input('Name: ', default="username", maxchar=8)
+change_img_btn = set_menu.add.button('Change avatar', lambda: change_image(avatar_img))
+change_img_btn.set_padding((5, 50))
+
+input_name = set_menu.add.text_input('Name: ', default="username", maxchar=12)
 input_name.set_padding((10, 15))
 
 back_btn = set_menu.add.button("<-BACK")
 back_btn.set_padding((10, 50))
+
+avatar_img = set_menu.add.image(avatar_path)
+
+avatar_img.resize(avatar_width, avatar_height)
+avatar_img.translate(WIDTH//2-avatar_img.get_width()//2-20, -HEIGHT//2)
 
 def menu(): 
     '''Show main menu with options'''
@@ -139,8 +147,7 @@ def game():
                 events[finishing_type]()
                 pygame.display.update()
                 pygame.time.delay(3000)
-                finishing_type = ''
-            
+               
             game = False 
             menu()
 
@@ -163,11 +170,11 @@ def settings():
         for ev in events:
             if ev.type ==  pygame.QUIT:
                 quit_settings()
-        if set_menu.is_enabled():
+        if set_menu.is_enabled():   
+
             set_menu.draw(window)
             set_menu.update(events)
             back_btn.set_onreturn(quit_settings)
-            
         pygame.display.update()
         clock.tick(FPS)
 

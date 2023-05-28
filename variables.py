@@ -16,6 +16,8 @@ YELLOW = (179, 176, 30)
 GREEN = (0, 200, 0)
 BLACK = (0, 0, 0)
 
+avatar_path = 'images/avatars/user.svg'
+avatar_width, avatar_height = 200, 200
 
 sprite_images = {
     'player': ['images/ship_images/spaceship_player.png', PURPLE],
