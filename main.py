@@ -4,7 +4,6 @@ from game_tools import *
 from theme import *
 from variables import * 
 
-
 pygame.init()
 
 #creating main window, clock
@@ -91,7 +90,7 @@ def game():
     
     pygame.display.set_caption("Space Shooter")
     game, finish, is_boss = [True, False, False] # game = True; finish = False; boss = False
-    [create_enemy(window, enemies, sprite_images[choice(['red_enemy', 'blue_enemy', 'green_enemy'])])
+    [create_enemy(window, enemies, sprite_images[random.choice(['red_enemy', 'blue_enemy', 'green_enemy'])])
                     for i in range(enemies_length)]
     while game:
         for ev in pygame.event.get():
@@ -115,7 +114,7 @@ def game():
                     (WIDTH, HEIGHT))
                 if level < max_level:
                     enemies_length += 3
-                    [create_enemy(window, enemies, sprite_images[choice(['red_enemy', 'blue_enemy', 'green_enemy'])])
+                    [create_enemy(window, enemies, sprite_images[random.choice(['red_enemy', 'blue_enemy', 'green_enemy'])])
                     for i in range(enemies_length)]
 
             if level == max_level:
@@ -137,7 +136,7 @@ def game():
             player.reset_health()
             boss_sprite.reset_health()
             boss_sprite.rect.x, boss_sprite.rect.y = WIDTH // 2, -100
-            boss_sprite.randx = choice(boss_sprite.rand_x_positions)
+            boss_sprite.randx = random.choice(boss_sprite.rand_x_positions)
             level, enemies_length = 1, 3
             is_boss = False
             for i in [player.bullets_group, boss_sprite.bullets_group, enemies]:
