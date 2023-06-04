@@ -26,7 +26,7 @@ def lose(lose_text, window, position):
 def change_image(image):
     global avatar_path
     app = QApplication([])
-    file, _= QFileDialog.getOpenFileName(filter='Image files (*.png *.jpg *svg *jpeg *gif)') 
+    file, _= QFileDialog.getOpenFileName(filter='Image files (*.png *.svg *.jpg *.gif)') 
     if file:
         avatar_path = file
     new_image = pygame_menu.baseimage.BaseImage(avatar_path)
