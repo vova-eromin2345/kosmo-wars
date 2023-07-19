@@ -146,7 +146,7 @@ def game():
                 events[finishing_type]()
                 pygame.display.update()
                 pygame.time.delay(3000)
-               
+                finishing_type = ''
             game = False 
             menu()
 
